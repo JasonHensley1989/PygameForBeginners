@@ -21,8 +21,9 @@ BORDER = pygame.Rect(WIDTH/2 - 5, 0, 10, HEIGHT)
 
 # FPS sets a universal speed across machines, this needs to be set because if not your machine could run it hundreds of times if not thousands per second, which isnt necessary
 FPS = 60
-# Sets bullet velocity
+# Sets bullet velocity, and max value
 BULLET_VEL = 7
+MAX_BULLETS = 5
 # sets spaceship dimensions to be called in
 SPACESHIP_WIDTH, SPACESHIP_HEIGHT = 55, 40
 
@@ -84,7 +85,8 @@ def main():
     yellow = pygame.Rect(100, 300, SPACESHIP_WIDTH, SPACESHIP_HEIGHT)
 
     #defines bullets
-    bullets = []
+    red_bullets = []
+    yellow_bullets = []
 
     #clock controls speed of the while loop in this case 60
     clock = pygame.time.Clock()
@@ -95,7 +97,20 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
    
+
+        #creates bullets on key press
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LCTRL and len(yellow_bullets) < MAX_BULLETS:
+                    bullet = pygame.Rect(yellow.x + yellow.width, yellow.y + yellow.height/2 -2, 10, 5)
+                    yellow_bullets.append(bullet)
+
+
+                if event.key == pygame.K_RCTRL and len(red_bullets) < MAX_BULLETS:
+                    bullet = pygame.Rect(red.x, red.y + red.height/2 -2, 10, 5)
+                    red_bullets.append(bullet)
+                    
         #runs key press function
+        print(red_bullets, yellow_bullets)
         keys_pressed = pygame.key.get_pressed()
         yellow_handle_movement(keys_pressed, yellow)
         red_handle_movement(keys_pressed, red)
