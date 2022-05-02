@@ -11,7 +11,7 @@ WIDTH, HEIGHT = 900, 500
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # changes name
-pygame.display.set_caption("Galaga")
+pygame.display.set_caption("Ship Destroyer")
 
 #colors for use in game
 WHITE = (255, 255, 255)
